@@ -1,4 +1,3 @@
-import { body } from "express-validator";
 import mongoose from "mongoose";
 import Bookings from "../models/Bookings.js";
 import Movie from "../models/Movie.js";
