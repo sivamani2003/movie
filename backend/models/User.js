@@ -15,5 +15,10 @@ const userSchema = new Schema({
         require:true,
         minLength:6,
     },
+    bookings:[
+        {
+            type:mongoose.Types.ObjectId,ref:"Booking"
+        }
+    ]
 });
 export default mongoose.model("User",userSchema);
