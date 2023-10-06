@@ -1,0 +1,28 @@
+/* MovieItem.css */
+
+.card {
+  max-width: 230px;
+  height: 320px;
+  border-radius: 5px;
+}
+
+.card:hover {
+  box-shadow: 10px 10px 20px #ccc;
+}
+
+.card-image {
+  height: 50%;
+  width: 100%;
+}
+
+.card-title {
+  /* Add any styles for the title here */
+}
+
+.card-description {
+  /* Add any styles for the description here */
+}
+
+.card-button {
+  /* Add any styles for the button here */
+}

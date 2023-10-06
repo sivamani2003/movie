@@ -6,14 +6,16 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import './header.css'
 import { getAllMovies } from '../apis/api.jsx';
+import { Link } from 'react-router-dom';
 const dummyArray=["RRR","Kushi","Toliprema"];
 const Header = () => {
   const [value,setValue]= useState(0);
+  const [movies,setMovies]=useState([]);
   useEffect(()=>{
-    getAllMovies().then((data)=>console.log(data))
+    getAllMovies().then((data)=>setMovies(data.movies))
     .catch((err)=>console.log(err))
   },[])
-  return <AppBar sx={{bgcolor:"#2b2d42"}} >
+  return <AppBar position='sticky' sx={{bgcolor:"	#10b5cb"}} >
     <Toolbar>
        <Box className='p1'>
         <MovieIcon></MovieIcon>
@@ -21,7 +23,7 @@ const Header = () => {
        <Box className='p2'>
        <Autocomplete
         freeSolo
-        options={dummyArray.map((option) => option)}
+        options={movies && movies.map((option) => option.title)}
         renderInput={(params) => <TextField 
           sx={{input:{color:"white"}}}
           variant='standard' {...params} placeholder="Search Across Movies" />}
@@ -29,9 +31,9 @@ const Header = () => {
        </Box>
        <Box className='p3'>
             <Tabs textColor='inherit' indicatorColor='secondary' value={value }onChange={(e,val)=>setValue(val)}>
-                <Tab label='Movies'></Tab>
-                <Tab label='Admin'></Tab>
-                <Tab label='Auth'></Tab>
+                <Tab LinkComponent={Link} to= "/movies"label='Movies'></Tab>
+                <Tab label='Admin' LinkComponent={Link} to= "/admin"></Tab>
+                <Tab label='Auth' LinkComponent={Link} to= "/auth"></Tab>
             </Tabs>
        </Box>
     </Toolbar>
