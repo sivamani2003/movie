@@ -1,0 +1,8 @@
+.movie1{
+  width: 100%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+  

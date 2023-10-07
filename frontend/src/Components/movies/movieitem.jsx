@@ -5,25 +5,33 @@ import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { Button, CardActions } from '@mui/material';
+import "./movieitem.css"
 
-const MovieItem = () => {
+const MovieItem = ({ title, releaseDate, postUrl, id }) => {
   return (
-    <Card sx={{ maxWidth: 230, height: 320, borderRadius: 5, ":hover": { boxShadow: "10px 10px 20px #ccc" } }}>
+    <Card
+      sx={{
+        width: 230,
+        height: 320,
+        borderRadius: 5,
+        margin: '16px', // Add margin here to create space between cards
+        ":hover": { boxShadow: "10px 10px 20px #ccc" },
+      }}
+    >
       <CardActionArea>
-        <img height={"50%"} width="100%" src="" alt="" />
+        <img height={"50%"} width="100%" src={postUrl} alt={title} />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            Lizard
+            {title}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
+            {new Date(releaseDate).toDateString()}
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary">
-          Share
+      <CardActions sx={{ justifyContent: 'center' }}>
+        <Button size="small" color="primary" className='share'>
+          Book
         </Button>
       </CardActions>
     </Card>
