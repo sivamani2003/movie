@@ -5,7 +5,7 @@ import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 
 const labelstyle = { mt: 1, mb: 1 };
 
-const Authform = () => {
+const Authform = ({onSubmit,isAdmin}) => {
   const [input, setinput] = useState({
     name: "", email: "", password: ""
   })
@@ -17,7 +17,7 @@ const Authform = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(input)
+    onSubmit({input,signup:isAdmin?false:isSignup})
   };
   const handleChange = (e)=>{
     setinput((prevState)=>({
@@ -37,7 +37,7 @@ const Authform = () => {
       </Typography>
       <form className='form' onSubmit={handleSubmit} >
         <Box className='formContainer'>
-          {isSignup && (
+          {!isAdmin && isSignup && (
             <>
               <FormLabel className={labelstyle}>Name</FormLabel>
               <TextField value={input.name}
@@ -59,14 +59,14 @@ const Authform = () => {
           >
             {isSignup ? 'Signup' : 'Login'}
           </Button>
-          <Button
+         {!isAdmin && <Button
             onClick={handleFormSwitch}
             sx={{ mt: 2, borderRadius: 10 }}
             type='button'
             fullWidth
           >
             {isSignup ? 'Login' : 'Signup'}
-          </Button>
+          </Button>}
         </Box>
       </form>
     </Dialog>
