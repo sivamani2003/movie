@@ -39,3 +39,11 @@ export const sendAdminAuthRequest = async(data)=>{
   const resData = await res.data;
   return resData
 }  
+export const getMovieDeatils = async(id)=>{
+  const res = await axios.get(`${BASE_URL}/movie/${id}`).catch((err)=>console.log(err))
+  if(res.status!==200){
+    return console.log("Un expected Error")
+  }
+  const resData = await res.data;
+  return resData
+}

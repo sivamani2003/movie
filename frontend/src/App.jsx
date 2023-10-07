@@ -8,6 +8,7 @@ import Movie from './Components/movies/Movie.jsx'
 import Auth from './Components/Auth/Auth'
 import { useDispatch, useSelector } from 'react-redux'
 import { adminActions, userActions } from './store/main'
+import Booking from './Components/Bookings/Booking'
 function App() {
   const dispatch = useDispatch()
   const isAdminloggedin = useSelector((state)=>state.admin.isloggedin)
@@ -29,6 +30,7 @@ function App() {
         <Route path='/movies' element={<Movie/>}/>
         <Route path='/admin' element={<Admin/>}/> 
         <Route path='/auth' element={<Auth/>}/>
+        <Route path='/booking/:id' element={<Booking/>}/>
       </Routes>
     </section>
   </div>
