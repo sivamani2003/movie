@@ -32,7 +32,7 @@ export const signup = async (req, res, next) => {
       return res.status(500).json({ message: "Unexpected error occurred" });
     }
   
-    return res.status(201).json({ id: user._id }); 
+    return res.status(201).json({ id: user._id });
   };
   
 export const updateUser = async(req,res,next)=>{
@@ -96,7 +96,7 @@ export const login = async(req,res,next)=>{
     if(!isPasswordCorrect){
         return res.status(400).json({message:"password Incoorect"})
     }
-    res.status(200).json({message:"login Sucessfully"})
+    res.status(200).json({message:"login Sucessfully",id: existingUser._id })
 
 }
 export const getBookingofUser = async(req,res,next)=>{

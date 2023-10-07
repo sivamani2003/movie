@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Button, Card, Typography } from '@mui/material';
-import './homepage.css'; // Import the CSS file
+import './homepage.css';
 import MovieItem from './movies/movieitem';
 import { getAllMovies } from '../apis/api';
 

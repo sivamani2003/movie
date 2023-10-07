@@ -36,7 +36,7 @@ const Movie = () => {
       <Box display={"flex"} width="100%" justifyContent={"flex-start"}  
       marginTop={5}
       flexWrap="wrap">
-        {movies.map((movie,index) => (
+        {movies && movies.map((movie,index) => (
           <MovieItem
             key={index}
             id={movie._id}
