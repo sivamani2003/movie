@@ -1,3 +1,26 @@
 .auth1{
     text-align: center;
+    color: #10b5cb;
 }
+.auth2{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 400rem !important;
+    margin: auto;
+    align-items: center;
+}
+.form{
+    margin: 25px;
+}
+.formContainer {
+    padding: 3px !important;
+    margin: 3px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-content: center;
+    margin: auto;
+    width: 400px!important;
+  }
+  
