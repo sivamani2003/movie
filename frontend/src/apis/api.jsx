@@ -28,3 +28,14 @@ export const sendUserAuthRequest = async(data,signup)=>{
   const resData = await res.data;
   return resData
 }
+export const sendAdminAuthRequest = async(data)=>{
+  const res =await axios.post(`${BASE_URL}/admin/login`,{
+    email:data.email,
+    password:data.password
+  }).catch((err)=>console.log(err))
+  if(res.status!==200){
+    console.log("Un excepted error Occured")
+  }
+  const resData = await res.data;
+  return resData
+}  
