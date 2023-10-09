@@ -19,15 +19,22 @@ const Booking = () => {
     <div className="booking-container">
       {movie && (
         <Fragment>
-          <Typography className='booking1' variant='h4'>
-            Book Tickets for Movie: {movie.title}
+          <Typography padding={3}
+            fontFamily="fantasy"
+            variant='h4'
+            textAlign={"center"}
+          >
+            Book Tickects of Movie :{movie.title}
           </Typography>
-          <Box className="book2">
-            <Box className="book3">
-              <img width="80%" height={"300px"} className='book4' src={movie.postUrl} alt={movie.title} />
-            </Box>
-            <Box width={"80%"}>
-
+          <Box display={"flex"} justifyContent="center" >
+            <Box display={"flex"} justifyContent={"column"} flexDirection="column"
+              paddingTop={3}
+              width="50%"
+              marginRight={"auto"}
+            >
+              <img width="80%"
+                height={"300px"}
+                src={movie.postUrl} alt={movie.title} />
             </Box>
           </Box>
         </Fragment>
