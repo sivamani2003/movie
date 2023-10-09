@@ -1,0 +1,40 @@
+/* booking.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Island+Moments&display=swap');
+
+.booking-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  text-align: center;
+}
+
+.booking1 {
+  width: 35%;
+  padding: 2rem;
+  font-family: "Island Moments", cursive;
+  font-size: 36px;
+  color: white;
+  background-color: hsl(187, 85%, 43%);
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+.book2 {
+  display: flex;
+  justify-content: center;
+}
+
+.book3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+ 
+}
+.book4{
+    padding-top: 3rem;
+    justify-content: center;
+    border-radius: 10px;
+    max-height: 300px;
+}
