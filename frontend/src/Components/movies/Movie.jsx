@@ -19,7 +19,6 @@ const Movie = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  console.log("hello");
   return (
     <Box margin="auto" marginTop={4}>
       <Typography
@@ -27,8 +26,7 @@ const Movie = () => {
         variant='h4'
         padding={2}
         width="40%"
-        bgcolor="#900C3F"
-        color="white"
+        color="#10b5cb"
         textAlign={"center"}
       >
         All Movies

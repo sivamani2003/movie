@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Fragment } from 'react';
 import { useParams } from 'react-router-dom';
-import { getMovieDeatils } from '../../apis/api';
-import { Box, Typography } from '@mui/material';
+import { getMovieDeatils, newBooking } from '../../apis/api';
+import { Box, Button, FormLabel, TextField, Typography } from '@mui/material';
 import './booking.css';
 
 const Booking = () => {
   const [movie, setmovie] = useState();
+  const [inputs, setInputs] = useState({ seatNumber: '', date: '' });
   const id = useParams().id;
 
   useEffect(() => {
@@ -15,26 +16,91 @@ const Booking = () => {
       .catch((err) => console.log(err));
   }, [id]);
 
+  const handleChange = (e) => {
+    setInputs((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(inputs);
+    newBooking({...inputs,movie:movie._id}).then((res)=>console.log(res)).catch((err)=>console.log(err))
+  };
+
   return (
-    <div className="booking-container">
+    <div>
       {movie && (
         <Fragment>
-          <Typography padding={3}
+          <Typography
+            padding={3}
             fontFamily="fantasy"
-            variant='h4'
-            textAlign={"center"}
+            variant="h4"
+            textAlign="center"
           >
-            Book Tickects of Movie :{movie.title}
+            Book Tickets of movie: {movie.title}
           </Typography>
-          <Box display={"flex"} justifyContent="center" >
-            <Box display={"flex"} justifyContent={"column"} flexDirection="column"
+          <Box display="flex" justifyContent="center">
+            <Box
+              display="flex"
+              justifyContent="column"
+              flexDirection="column"
               paddingTop={3}
               width="50%"
-              marginRight={"auto"}
+              marginRight="auto"
             >
-              <img width="80%"
-                height={"300px"}
-                src={movie.postUrl} alt={movie.title} />
+              <img
+                width="80%"
+                height="300px"
+                src={movie.postUrl}
+                alt={movie.title}
+              />
+              <Box
+                width="80%"
+                marginTop={3}
+                padding={2}
+              >
+                <Typography padding={2}>{movie.description}</Typography>
+                <Typography fontWeight="bold" marginTop={1} marginLeft={2}>
+                  Actors: {movie.actors.map((actor) => '' + actor + ',')}
+                </Typography>
+                <Typography fontWeight="bold" marginTop={1}>
+                  Release date: {new Date(movie.releaseDate).toDateString()}
+                </Typography>
+              </Box>
+            </Box>
+            <Box width="50%" paddingTop={3}>
+              <form onSubmit={handleSubmit}>
+                <Box
+                  padding={5}
+                  margin="auto"
+                  flexDirection="column"
+                  display="flex"
+                >
+                  <FormLabel>Seat Number</FormLabel>
+                  <TextField
+                    value={inputs.seatNumber}
+                    onChange={handleChange}
+                    name="seatNumber"
+                    type="number"
+                    margin="normal"
+                    variant="standard"
+                  />
+                  <FormLabel>Booking Date</FormLabel>
+                  <TextField
+                    value={inputs.date}
+                    onChange={handleChange}
+                    name="date"
+                    type="date"
+                    margin="normal"
+                    variant="standard"
+                  />
+                  <Button type="submit" sx={{ mt: 3 }}>
+                    Book Tickets
+                  </Button>
+                </Box>
+              </form>
             </Box>
           </Box>
         </Fragment>

@@ -47,3 +47,17 @@ export const getMovieDeatils = async(id)=>{
   const resData = await res.data;
   return resData
 }
+export const newBooking = async(data)=>{
+
+  const res = axios.post(`http://localhost:4000/booking`,{
+    movie:data.movie,
+    seatNumber:data.seatNumber,
+    date:data.date,
+    user:localStorage.getItem("userId")
+  }).catch((err)=>console.log(err))
+  if(res.status!==200){
+    return console.log("Un expected Error")
+  }
+  const resData = await res.data;
+  return resData
+}
