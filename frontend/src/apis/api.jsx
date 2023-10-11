@@ -49,7 +49,7 @@ export const getMovieDeatils = async(id)=>{
 }
 export const newBooking = async(data)=>{
 
-  const res = axios.post(`http://localhost:4000/booking`,{
+  const res = axios.post(`${BASE_URL}/booking`,{
     movie:data.movie,
     seatNumber:data.seatNumber,
     date:data.date,
