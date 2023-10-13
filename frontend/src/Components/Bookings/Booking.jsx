@@ -26,7 +26,7 @@ const Booking = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(inputs);
-    newBooking({...inputs,movie:movie._id}).then((res)=>console.log(res)).catch((err)=>console.log(err))
+    newBooking({...inputs,movie:movie._id})
   };
 
   return (

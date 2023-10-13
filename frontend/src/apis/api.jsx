@@ -55,7 +55,7 @@ export const newBooking = async(data)=>{
     date:data.date,
     user:localStorage.getItem("userId")
   }).catch((err)=>console.log(err))
-  if(res.status!==200){
+  if(res.status!==201){
     return console.log("Un expected Error")
   }
   const resData = await res.data;
