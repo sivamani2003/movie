@@ -1,0 +1,20 @@
+.profile1{
+    width: 100%;
+    display: flex;
+}
+.profile2{
+    width: 30%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.profile3{
+    width: 70%;
+}
+.profile4{
+    padding: 1rem;
+    width: auto;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}

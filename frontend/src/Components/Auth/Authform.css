@@ -23,4 +23,14 @@
     margin: auto;
     width: 400px!important;
   }
+  .metamask-link {
+    text-align: right;
+    margin-top: 10px;
+    margin-right: 10px;
+  }
+  
+  .metamask-image {
+    max-width: 100%;
+    height: auto;
+  }
   

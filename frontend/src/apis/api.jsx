@@ -47,17 +47,43 @@ export const getMovieDeatils = async(id)=>{
   const resData = await res.data;
   return resData
 }
-export const newBooking = async(data)=>{
+export const newBooking = async (data) => {
+  try {
+    const res = await axios.post(`${BASE_URL}/booking`, {
+      movie: data.movie,
+      seatNumber: data.seatNumber,
+      date: data.date,
+      user: localStorage.getItem("userId")
+    });
 
-  const res = axios.post(`${BASE_URL}/booking`,{
-    movie:data.movie,
-    seatNumber:data.seatNumber,
-    date:data.date,
-    user:localStorage.getItem("userId")
-  }).catch((err)=>console.log(err))
-  if(res.status!==201){
-    return console.log("Un expected Error")
+    if (res.status === 201) {
+      // A status of 201 indicates a successful creation (booking created).
+      const resData = await res.data;
+      return resData;
+    } else {
+      console.error("Unexpected Error: Unable to create a new booking");
+      console.error("Response status: " + res.status);
+      throw new Error("Error creating a new booking");
+    }
+  } catch (err) {
+    console.error("Error in newBooking:", err);
+    throw err;
   }
-  const resData = await res.data;
-  return resData
-}
+};
+export const getUserBooking = async () => {
+  const id = localStorage.getItem("userId");
+  try {
+    const res = await axios.get(`${BASE_URL}/users/bookings/${id}`);
+    
+    if (res.status === 200) {
+      return res.data;
+    } else {
+      console.error("Unexpected Error: Unable to fetch user bookings");
+      console.error("Response status: " + res.status);
+      throw new Error("Error fetching user bookings");
+    }
+  } catch (err) {
+    console.error("Error in getUserBooking:", err);
+    throw err;
+  }
+};
