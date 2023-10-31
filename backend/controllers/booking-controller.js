@@ -7,55 +7,65 @@ export const newBooking = async (req, res, next) => {
 
     let existingMovie;
     let existingUser;
+
     try {
-        existingMovie = await Movie.findById(movie)
-        existingUser = await User.findById(user)
+        existingMovie = await Movie.findById(movie);
+        existingUser = await User.findById(user);
 
-        if(!existingMovie){
-            return res.status(404).json({message:"MOvie not found with given id"})  
+        if (!existingMovie) {
+            return res.status(404).json({ message: "Movie not found with the given ID" });
         }
-        if(!existingUser){
-            return res.status(404).json({message:"User not found"})
+        if (!existingUser) {
+            return res.status(404).json({ message: "User not found" });
         }
 
-    } catch (err) {
-        return console.log(err)
-    }
-    let booking; 
-    try {
-       booking = new Bookings({ movie, date: new Date(`${date}`), seatNumber, user }); 
+        const booking = new Bookings({ movie, date: new Date(`${date}`), seatNumber, user });
 
-        const session =await mongoose.startSession();
+        const session = await mongoose.startSession();
+        session.startTransaction();
+
+        existingUser.bookings.push(booking);
+        existingMovie.bookings.push(booking);
+        await existingUser.save({ session });
+        await existingMovie.save({ session });
+        await booking.save({ session });
+        session.commitTransaction();
         
-        existingUser.bookings.push(booking)
-        existingMovie.bookings.push(booking)
-        await existingUser.save({session})
-        await existingMovie.save({session})
-        await booking.save({session})
-        
-        booking = await booking.save(); 
+        return res.status(201).json({ booking });
     } catch (err) {
-        return console.log(err);
-    }
-    if (!booking) {
         return res.status(500).json({ message: "Request Failed" });
     }
-    return res.status(201).json({ booking});
 };
-export const getBookingByID = async(req,res,next)=>{
+
+export const getBookingByID = async (req, res, next) => {
     const id = req.params.id;
-    let booking;
     try {
-        booking = await Bookings.findById(id)
+        const booking = await Bookings.findById(id).populate('user');
+        if (!booking) {
+            return res.status(404).json({ message: 'Booking not found' });
+        }
+        const user = booking.user;
+        const session = await mongoose.startSession();
+        session.startTransaction();
+
+        existingUser.bookings.push(booking);
+        existingMovie.bookings.push(booking);
+        await existingUser.save({ session });
+        await existingMovie.save({ session });
+        await booking.save({ session });
+        session.commitTransaction();
+        if (!user) {
+            return res.status(404).json({ message: 'User not found for this booking' });
+        }
+
+        return res.status(200).json({ booking, user });
     } catch (err) {
-        return console.log(err)
-        
+        console.error(err);
+        return res.status(500).json({ message: 'Error retrieving booking' });
     }
-    if(!booking){
-        return res.status(500).json({message:"Error"})
-    }
-    return res.status(200).json({booking})
-}
+};
+
+
 export const deleteBooking = async (req, res, next) => {
     const id = req.params.id;
     try {

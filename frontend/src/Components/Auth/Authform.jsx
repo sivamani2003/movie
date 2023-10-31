@@ -72,12 +72,12 @@ const Authform = ({ onSubmit, isAdmin }) => {
             type='password'
             name='password'
           />
-          <div className="metamask-link">
+          {/* <div className="metamask-link">
             <p>Connect with MetaMask</p>
             <a href="#metamask-auth">
               <img className='meta-mask-image' width={"10%"}  src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/MetaMask_Fox.svg/800px-MetaMask_Fox.svg.png" alt="MetaMask" />
             </a>
-          </div>
+          </div> */}
 
           <Button
             sx={{ mt: 2, borderRadius: 10, bgcolor: '#10b5cb' }}
